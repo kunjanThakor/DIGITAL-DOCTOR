@@ -49,9 +49,10 @@ public class SecurityConfig {
 			public void addCorsMappings(CorsRegistry registry) {
 				System.out.println("Cors working....");
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")
+						.allowedOrigins("*")
 						.allowedMethods("*")
 						.allowedHeaders("*")
+						.exposedHeaders("*")
 						.allowCredentials(false);
 			}
 		};
@@ -90,7 +91,7 @@ public class SecurityConfig {
 //			corse.configurationSource(request->new CorsConfiguration().applyPermitDefaultValues());
 		});
 		http.authorizeHttpRequests(authorize -> {
-			authorize.requestMatchers("/sec/**").hasRole("ADMIN");
+			authorize.requestMatchers("/sec/**").authenticated();
 //			authorize.requestMatchers("http://localhost:4200/participentMain").authenticated();
 			authorize.requestMatchers("/**").permitAll();
 			authorize.anyRequest().permitAll();
