@@ -68,7 +68,8 @@ import com.globtechpower.globtpfapidata.model.VolunteerImage;
 import com.globtechpower.globtpfapidata.service.VolunteerServices;
 
 @RestController
-@CrossOrigin(origins = "*",allowedHeaders = {"Authorization"})
+@CrossOrigin(origins = "*")
+@RequestMapping("/sec")
 public class VolunteerController {
 
     @Autowired
@@ -89,9 +90,7 @@ public class VolunteerController {
         }
     }
 
-//    @CrossOrigin(origins = "http://localhost:4200")
-//    @PreAuthorize
-    @GetMapping("/sec/showVolunteer")
+    @GetMapping("/showVolunteer")
     public ResponseEntity<List<Volunteer>> getAllVolunteers() {
         List<Volunteer> volunteers = volunteerServices.showData();
         return new ResponseEntity<>(volunteers, HttpStatus.OK);

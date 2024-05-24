@@ -22,44 +22,47 @@ import jakarta.servlet.http.HttpServletRequest;
 @EnableWebMvc
 public class SecurityConfig {
 
-    @Autowired
-    UserServiceImp userServiceImp;
+	@Autowired
+	UserServiceImp userServiceImp;
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    DaoAuthenticationProvider authenticationprovider() {
-        DaoAuthenticationProvider daoAuthentication = new DaoAuthenticationProvider();
-        daoAuthentication.setUserDetailsService(userServiceImp);
-        daoAuthentication.setPasswordEncoder(passwordEncoder());
-        return daoAuthentication;
-    }
+	@Bean
+	DaoAuthenticationProvider authenticationprovider() {
+		DaoAuthenticationProvider daoAuthentication = new DaoAuthenticationProvider();
+		daoAuthentication.setUserDetailsService(userServiceImp);
+		daoAuthentication.setPasswordEncoder(passwordEncoder());
+		return daoAuthentication;
+	}
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                System.out.println("Cors working....");
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*")
-                        .exposedHeaders("*").allowCredentials(false);
-            }
-        };
-    }
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				System.out.println("Cors working....");
+				registry.addMapping("/**").allowedOrigins("*") // Replace with your Angular app's
+																					// URL
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
+						.exposedHeaders("*").allowCredentials(false);
+			}
+		};
+	}
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(c -> c.disable());
-        http.cors(corse -> corse.disable());
-        http.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers("/sec/**").authenticated();
-            authorize.requestMatchers("/**").permitAll();
-            authorize.anyRequest().permitAll();
-        });
-        http.httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.disable());
+		http.cors(corse -> corse.disable());
+		http.authorizeHttpRequests(authorize -> {
+			authorize.requestMatchers("/sec/**").permitAll();
+			authorize.requestMatchers("/bylogin").permitAll();
+			authorize.requestMatchers("/**").permitAll();
+			authorize.anyRequest().permitAll();
+		});
+		http.httpBasic(Customizer.withDefaults());
+		return http.build();
+	}
 }
