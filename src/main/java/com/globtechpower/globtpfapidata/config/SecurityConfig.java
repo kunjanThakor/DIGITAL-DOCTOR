@@ -57,8 +57,11 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable());
 		http.cors(corse -> corse.disable());
 		http.authorizeHttpRequests(authorize -> {
+			authorize.requestMatchers("/api.html").hasRole("ADMIN");
+			authorize.requestMatchers("/swagger-ui/**").hasRole("ADMIN");
 			authorize.requestMatchers("/sec/**").permitAll();
 			authorize.requestMatchers("/bylogin").permitAll();
+			authorize.requestMatchers("/v3/api-docs/").permitAll();
 			authorize.requestMatchers("/**").permitAll();
 			authorize.anyRequest().permitAll();
 		});
