@@ -44,8 +44,7 @@ public class SecurityConfig {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				System.out.println("Cors working....");
-				registry.addMapping("/**").allowedOrigins("*") // Replace with your Angular app's
-																					// URL
+				registry.addMapping("/**").allowedOrigins("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
 						.exposedHeaders("*").allowCredentials(false);
 			}
@@ -61,7 +60,6 @@ public class SecurityConfig {
 			authorize.requestMatchers("/swagger-ui/**").hasRole("ADMIN");
 			authorize.requestMatchers("/sec/**").permitAll();
 			authorize.requestMatchers("/bylogin").permitAll();
-			authorize.requestMatchers("/v3/api-docs/").permitAll();
 			authorize.requestMatchers("/**").permitAll();
 			authorize.anyRequest().permitAll();
 		});
