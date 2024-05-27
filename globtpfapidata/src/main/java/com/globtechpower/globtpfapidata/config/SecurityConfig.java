@@ -63,7 +63,7 @@ public class SecurityConfig {
 			authorize.requestMatchers("/**").permitAll();
 			authorize.anyRequest().permitAll();
 		});
-		http.httpBasic(Customizer.withDefaults());
+		http.formLogin(Customizer.withDefaults());
 		return http.build();
 	}
 }
