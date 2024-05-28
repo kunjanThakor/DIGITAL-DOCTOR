@@ -28,6 +28,8 @@ public class Participent implements UserDetails {
 	private String email;
 	private Long contact;
 	private String password;
+	private boolean enabled = true; 
+    private boolean accountNonLocked = true; 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles = new ArrayList<>();
 
@@ -101,7 +103,7 @@ public class Participent implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return true;
+		return accountNonLocked;
 	}
 
 	@Override
@@ -113,7 +115,17 @@ public class Participent implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return enabled;
 	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	
+	
 
 }

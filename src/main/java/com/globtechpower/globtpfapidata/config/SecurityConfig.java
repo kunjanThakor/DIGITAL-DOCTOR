@@ -59,7 +59,7 @@ public class SecurityConfig {
 			authorize.requestMatchers("/api.html").hasRole("ADMIN");
 			authorize.requestMatchers("/swagger-ui/**").hasRole("ADMIN");
 			authorize.requestMatchers("/sec/**").permitAll();
-			authorize.requestMatchers("/bylogin").permitAll();
+			authorize.requestMatchers("/sec/bylogin/**").permitAll();
 			authorize.requestMatchers("/**").permitAll();
 			authorize.anyRequest().permitAll();
 		});
