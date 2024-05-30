@@ -75,7 +75,7 @@ public class ParticipentController {
 		String email = loginData.get("email");
 		String password = loginData.get("password");
 		Participent p = participentService.getByEmial(email);
-		System.out.println(p.isEnabled() + " " + p.isAccountNonLocked());
+//		System.out.println(p.isEnabled() + " " + p.isAccountNonLocked());
 		if (p != null && passwordEncoder.matches(password, p.getPassword())) {
 			return p;
 		} else {
@@ -97,7 +97,7 @@ public class ParticipentController {
 		return participents.size();
 	}
 	
-	@GetMapping("/sec/{id}/{enabled}")
+	@GetMapping("/sec/enable/{id}/{enabled}")
 	 public ResponseEntity<?> toggleEnable(@PathVariable Long id, @PathVariable boolean enabled) {
 		Participent participant = pr.findById(id).get();
         participant.setEnabled(enabled);
