@@ -59,6 +59,8 @@ public class ProjectServices {
 //		prj.setId(project.getId());
 		prj.setDescription(project.getDescription());
 		prj.setTitle(project.getTitle());
+		prj.setProjectDetails(project.getProjectDetails());
+//		prj.setProjectImage(project.getProjectImage());
 		projectRepository.save(prj);
 		
 	}

@@ -85,6 +85,8 @@ public class ParticipentController {
 	}
 	
 	
+	
+	
 	@GetMapping("/sec/displaydisabled")
 	List<Participent> disabledParticipents(){
 		List<Participent> participents = pr.findByEnabledFalse();
@@ -105,5 +107,13 @@ public class ParticipentController {
 		return ResponseEntity.ok().build();
 	}
 	
+	
+	
+	@PostMapping("/sec/forgotpassword")
+	public void forgotPassword(@RequestBody Map<String, String> data) {
+		String email = data.get("email");
+		String password = passwordEncoder.encode(data.get("password"));
+		participentService.updatePassword(email,password);
+	}
 	
 }

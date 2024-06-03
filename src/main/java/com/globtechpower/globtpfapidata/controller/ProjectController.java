@@ -50,7 +50,6 @@ public class ProjectController {
 	
 	@PostMapping("/deletebyid")
 	public void deleteById(@RequestBody Long id) {
-		System.out.println(id);
 		projectServices.deleteById(id);
 	}
 	

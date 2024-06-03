@@ -1,6 +1,7 @@
 package com.globtechpower.globtpfapidata.model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	@Column(length = 50000)
 	private String description;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

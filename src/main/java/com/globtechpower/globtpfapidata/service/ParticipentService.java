@@ -28,4 +28,10 @@ public class ParticipentService {
 	public Participent getByEmial(String email) {
 		return participentRepository.findByEmail(email);
 	}
+
+	public void updatePassword(String email,String password) {
+			Participent part = participentRepository.findByEmail(email);
+			part.setPassword(password);
+			participentRepository.save(part);
+	}
 }
