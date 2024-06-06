@@ -107,6 +107,14 @@ public class ParticipentController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@GetMapping("/sec/update/{id}/{role}")
+	public ResponseEntity<?> toggleEnable(@PathVariable Long id, @PathVariable String role) {
+		Participent participant = pr.findById(id).get();
+		participant.setRoles(List.of(role));
+		pr.save(participant);
+		return ResponseEntity.ok().build();
+	}
+	
 	
 	
 	@PostMapping("/sec/forgotpassword")
