@@ -110,7 +110,9 @@ public class ParticipentController {
 	@GetMapping("/sec/update/{id}/{role}")
 	public ResponseEntity<?> toggleEnable(@PathVariable Long id, @PathVariable String role) {
 		Participent participant = pr.findById(id).get();
-		participant.setRoles(List.of(role));
+		List<String> nr = new ArrayList<String>();
+		nr.add(role);
+		participant.setRoles(nr);
 		pr.save(participant);
 		return ResponseEntity.ok().build();
 	}
